@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Management System</title>
+  <link rel="stylesheet" href="/ui/style.css" />
+</head>
+<body>
+  <div id="app">
+
+    <!-- SIDEBAR -->
+    <aside id="sidebar">
+      <div id="sidebar-header">
+        <span id="sidebar-logo">SMS</span>
+        <span id="sidebar-title">Student MS</span>
+      </div>
+      <nav id="sidebar-nav">
+        <a class="nav-item" data-page="dashboard" href="#dashboard">
+          <span class="nav-icon">&#9632;</span>
+          <span class="nav-label">Dashboard</span>
+        </a>
+        <a class="nav-item" data-page="students" href="#students">
+          <span class="nav-icon">&#9632;</span>
+          <span class="nav-label">Students</span>
+        </a>
+        <a class="nav-item" data-page="courses" href="#courses">
+          <span class="nav-icon">&#9632;</span>
+          <span class="nav-label">Courses</span>
+        </a>
+        <a class="nav-item" data-page="enrollments" href="#enrollments">
+          <span class="nav-icon">&#9632;</span>
+          <span class="nav-label">Enrollments</span>
+        </a>
+        <a class="nav-item" data-page="attendance" href="#attendance">
+          <span class="nav-icon">&#9632;</span>
+          <span class="nav-label">Attendance</span>
+        </a>
+        <a class="nav-item" data-page="grades" href="#grades">
+          <span class="nav-icon">&#9632;</span>
+          <span class="nav-label">Grades</span>
+        </a>
+      </nav>
+      <div id="sidebar-footer">
+        <span id="sidebar-user"></span>
+        <button class="logout-btn" onclick="logout()">Sign Out</button>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main id="main">
+      <div id="page-content">
+        <!-- Dynamically replaced by renderXxx() functions -->
+      </div>
+    </main>
+
+  </div>
+
+  <!-- MODAL OVERLAY -->
+  <div id="modal-overlay" class="hidden" onclick="if(event.target===this) closeModal()">
+    <div id="modal">
+      <div id="modal-header">
+        <h2 id="modal-title"></h2>
+        <button id="modal-close" onclick="closeModal()">&times;</button>
+      </div>
+      <div id="modal-body">
+        <!-- Dynamically populated per action -->
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST CONTAINER -->
+  <div id="toasts"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+  <script src="/ui/app.js"></script>
+</body>
+</html>

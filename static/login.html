@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign In — Student Management System</title>
+  <link rel="stylesheet" href="/ui/style.css" />
+  <style>
+    * { box-sizing: border-box; }
+
+    body.login-body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+      padding: 32px 48px;
+      background: linear-gradient(135deg, #1e293b 0%, #3730a3 50%, #4f46e5 100%);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    /* ── Login card ─────────────────────────────────────────── */
+    .login-card {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 40px 36px 32px;
+      width: 100%;
+      flex: 0 0 380px;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+      align-self: center;
+    }
+
+    /* ── Responsive: stack on narrow screens ─────────────────── */
+    @media (max-width: 900px) {
+      body.login-body {
+        flex-direction: column;
+        padding: 32px 20px;
+        gap: 28px;
+      }
+      .login-card { flex: none; width: 100%; max-width: 420px; }
+      .access-panel { width: 100%; max-width: 100%; }
+    }
+
+    .login-brand {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .login-logo {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, #4f46e5, #3730a3);
+      color: #fff;
+      font-weight: 800;
+      font-size: 1.15rem;
+      border-radius: 14px;
+      margin-bottom: 14px;
+      letter-spacing: 0.05em;
+      box-shadow: 0 8px 20px rgba(79, 70, 229, 0.4);
+    }
+
+    .login-brand h1 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #1e293b;
+      margin-bottom: 4px;
+    }
+
+    .login-brand p {
+      color: #64748b;
+      font-size: 0.875rem;
+    }
+
+    .login-error {
+      background: #fee2e2;
+      color: #991b1b;
+      border: 1px solid #fca5a5;
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 0.875rem;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .login-error.hidden { display: none; }
+
+    .login-card .form-group { margin-bottom: 16px; }
+
+    .login-card label {
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: #64748b;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .login-card .form-control {
+      width: 100%;
+      padding: 10px 14px;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      color: #1e293b;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .login-card .form-control:focus {
+      border-color: #4f46e5;
+      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+    }
+
+    .login-btn {
+      width: 100%;
+      padding: 11px;
+      background: linear-gradient(135deg, #4f46e5, #3730a3);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 8px;
+      transition: opacity 0.2s, transform 0.1s;
+      letter-spacing: 0.02em;
+    }
+    .login-btn:hover  { opacity: 0.92; }
+    .login-btn:active { transform: scale(0.99); }
+
+    /* ── User access table ──────────────────────────────────── */
+    .access-panel {
+      flex: 1;
+      min-width: 0;
+      max-width: 780px;
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 16px;
+      padding: 28px 28px 20px;
+      backdrop-filter: blur(6px);
+      align-self: center;
+    }
+
+    .access-panel-title {
+      color: #e2e8f0;
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .access-panel-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .access-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.82rem;
+    }
+
+    .access-table thead tr {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .access-table th {
+      padding: 8px 10px;
+      color: #94a3b8;
+      font-weight: 600;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    /* Left-align the info columns; let them size to content */
+    .access-table th:first-child,
+    .access-table th:nth-child(2),
+    .access-table th:nth-child(3) { text-align: left; }
+
+    /* Access icon columns — fixed narrow width */
+    .access-table th:nth-child(n+4) { width: 56px; min-width: 56px; }
+
+    .access-table td {
+      padding: 11px 10px;
+      text-align: center;
+      vertical-align: middle;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      white-space: nowrap;
+    }
+
+    .access-table td:first-child,
+    .access-table td:nth-child(2),
+    .access-table td:nth-child(3) { text-align: left; }
+
+    .access-table tbody tr:last-child td { border-bottom: none; }
+
+    .access-table tbody tr {
+      transition: background 0.15s;
+      cursor: pointer;
+    }
+    .access-table tbody tr:hover {
+      background: rgba(255, 255, 255, 0.06);
+      border-radius: 8px;
+    }
+
+    /* Role badge */
+    .role-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 700;
+      font-size: 0.82rem;
+      color: #e2e8f0;
+      white-space: nowrap;
+    }
+
+    .role-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .dot-admin        { background: #a78bfa; }
+    .dot-studentadmin { background: #34d399; }
+    .dot-courseadmin  { background: #60a5fa; }
+    .dot-teacher      { background: #fbbf24; }
+
+    /* Credential display */
+    .cred-user {
+      font-family: monospace;
+      font-size: 0.85rem;
+      color: #c7d2fe;
+      font-weight: 600;
+    }
+
+    .cred-pass {
+      font-family: monospace;
+      font-size: 0.85rem;
+      color: #94a3b8;
+    }
+
+    /* Access indicators */
+    .tick  { color: #4ade80; font-size: 1rem; }
+    .cross { color: rgba(255,255,255,0.18); font-size: 0.9rem; }
+
+    /* Highlight on quick-fill */
+    .access-table tbody tr.row-highlight td {
+      background: rgba(79, 70, 229, 0.2);
+    }
+
+    .quick-fill-hint {
+      text-align: center;
+      color: rgba(255, 255, 255, 0.3);
+      font-size: 0.72rem;
+      margin-top: 14px;
+      letter-spacing: 0.03em;
+    }
+  </style>
+</head>
+<body class="login-body">
+
+  <!-- Login form -->
+  <div class="login-card">
+    <div class="login-brand">
+      <div class="login-logo">SMS</div>
+      <h1>Student Management System</h1>
+      <p>Sign in to your account</p>
+    </div>
+
+    <form id="login-form" onsubmit="handleLogin(event)" novalidate>
+      <div id="login-error" class="login-error hidden">
+        ⚠ Invalid username or password. Please try again.
+      </div>
+
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input class="form-control" type="text" id="username"
+               autocomplete="username" placeholder="Enter username" required autofocus />
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input class="form-control" type="password" id="password"
+               autocomplete="current-password" placeholder="Enter password" required />
+      </div>
+
+      <button type="submit" class="login-btn">Sign In</button>
+    </form>
+  </div>
+
+  <!-- User accounts & access levels -->
+  <div class="access-panel">
+    <div class="access-panel-title">Demo Accounts &amp; Access Levels</div>
+    <table class="access-table">
+      <thead>
+        <tr>
+          <th>Role</th>
+          <th>Username</th>
+          <th>Password</th>
+          <th>Dash</th>
+          <th>Students</th>
+          <th>Courses</th>
+          <th>Enroll</th>
+          <th>Attend</th>
+          <th>Grades</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr onclick="quickFill('admin','admin123')" title="Click to fill credentials">
+          <td><span class="role-badge"><span class="role-dot dot-admin"></span>Administrator</span></td>
+          <td><span class="cred-user">admin</span></td>
+          <td><span class="cred-pass">admin123</span></td>
+          <td><span class="tick">✓</span></td>
+          <td><span class="tick">✓</span></td>
+          <td><span class="tick">✓</span></td>
+          <td><span class="tick">✓</span></td>
+          <td><span class="tick">✓</span></td>
+          <td><span class="tick">✓</span></td>
+        </tr>
+        <tr onclick="quickFill('studentadmin','student123')" title="Click to fill credentials">
+          <td><span class="role-badge"><span class="role-dot dot-studentadmin"></span>Student Admin</span></td>
+          <td><span class="cred-user">studentadmin</span></td>
+          <td><span class="cred-pass">student123</span></td>
+          <td><span class="tick">✓</span></td>
+          <td><span class="tick">✓</span></td>
+          <td><span class="cross">✕</span></td>
+          <td><span class="tick">✓</span></td>
+          <td><span class="cross">✕</span></td>
+          <td><span class="cross">✕</span></td>
+        </tr>
+        <tr onclick="quickFill('courseadmin','course123')" title="Click to fill credentials">
+          <td><span class="role-badge"><span class="role-dot dot-courseadmin"></span>Course Admin</span></td>
+          <td><span class="cred-user">courseadmin</span></td>
+          <td><span class="cred-pass">course123</span></td>
+          <td><span class="tick">✓</span></td>
+          <td><span class="cross">✕</span></td>
+          <td><span class="tick">✓</span></td>
+          <td><span class="tick">✓</span></td>
+          <td><span class="cross">✕</span></td>
+          <td><span class="cross">✕</span></td>
+        </tr>
+        <tr onclick="quickFill('teacher','teacher123')" title="Click to fill credentials">
+          <td><span class="role-badge"><span class="role-dot dot-teacher"></span>Teacher</span></td>
+          <td><span class="cred-user">teacher</span></td>
+          <td><span class="cred-pass">teacher123</span></td>
+          <td><span class="tick">✓</span></td>
+          <td><span class="cross">✕</span></td>
+          <td><span class="cross">✕</span></td>
+          <td><span class="cross">✕</span></td>
+          <td><span class="tick">✓</span><br><small style="color:#fbbf24;font-size:0.65rem;line-height:1;">mark only</small></td>
+          <td><span class="cross">✕</span></td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="quick-fill-hint">Click any row to auto-fill credentials</p>
+  </div>
+
+  <script>
+    if (sessionStorage.getItem('sms_auth') === 'true') {
+      window.location.replace('/ui/');
+    }
+
+    const USERS = {
+      admin:        { password: 'admin123',   role: 'admin',        label: 'Administrator' },
+      studentadmin: { password: 'student123', role: 'studentadmin', label: 'Student Admin' },
+      courseadmin:  { password: 'course123',  role: 'courseadmin',  label: 'Course Admin'  },
+      teacher:      { password: 'teacher123', role: 'teacher',      label: 'Teacher'       },
+    };
+
+    function handleLogin(event) {
+      event.preventDefault();
+      const username = document.getElementById('username').value.trim().toLowerCase();
+      const password = document.getElementById('password').value;
+      const errEl    = document.getElementById('login-error');
+      const user     = USERS[username];
+
+      if (user && user.password === password) {
+        sessionStorage.setItem('sms_auth',  'true');
+        sessionStorage.setItem('sms_user',  username);
+        sessionStorage.setItem('sms_role',  user.role);
+        sessionStorage.setItem('sms_label', user.label);
+        window.location.replace('/ui/');
+      } else {
+        errEl.classList.remove('hidden');
+        document.getElementById('password').value = '';
+        document.getElementById('password').focus();
+      }
+    }
+
+    function quickFill(username, password) {
+      document.getElementById('username').value = username;
+      document.getElementById('password').value = password;
+      document.getElementById('login-error').classList.add('hidden');
+      document.getElementById('login-form').querySelector('button[type="submit"]').focus();
+    }
+  </script>
+</body>
+</html>
