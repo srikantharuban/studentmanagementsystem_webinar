@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login — Playwright Test Report — 2026-08-31-1813</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f4f6f9; color: #333; }
+  header { background: #1a1a2e; color: #fff; padding: 24px 32px; }
+  header h1 { font-size: 22px; font-weight: 700; margin-bottom: 6px; }
+  header p { font-size: 13px; color: #aab; margin-top: 4px; }
+  .container { max-width: 1100px; margin: 0 auto; padding: 28px 24px; }
+  .section-title { font-size: 16px; font-weight: 700; color: #1a1a2e; margin: 28px 0 14px; border-left: 4px solid #4f8ef7; padding-left: 10px; }
+  .cards { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 10px; }
+  .card { background: #fff; border-radius: 10px; padding: 18px 24px; min-width: 130px; flex: 1; box-shadow: 0 1px 4px rgba(0,0,0,0.08); text-align: center; }
+  .card .label { font-size: 12px; color: #777; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+  .card .value { font-size: 28px; font-weight: 700; }
+  .card.total .value { color: #1a1a2e; }
+  .card.passed .value { color: #16a34a; }
+  .card.failed .value { color: #dc2626; }
+  .card.flaky .value { color: #ea580c; }
+  .card.healed .value { color: #d97706; }
+  .card.rate .value { color: #2563eb; }
+  .card.duration .value { color: #7c3aed; font-size: 22px; }
+  table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+  th { background: #1a1a2e; color: #fff; padding: 12px 14px; font-size: 12px; text-align: left; font-weight: 600; letter-spacing: 0.3px; }
+  td { padding: 11px 14px; font-size: 13px; border-bottom: 1px solid #f0f0f0; vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: #f8f9fc; }
+  .badge { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 12px; font-weight: 600; letter-spacing: 0.3px; }
+  .badge-passed { background: #dcfce7; color: #15803d; }
+  .badge-failed { background: #fee2e2; color: #b91c1c; }
+  .badge-flaky { background: #ffedd5; color: #c2410c; }
+  .badge-healed { background: #fef3c7; color: #b45309; }
+  .badge-skipped { background: #f1f5f9; color: #64748b; }
+  .meta-table td:first-child { font-weight: 600; color: #555; width: 200px; }
+  .no-healer { color: #777; font-style: italic; font-size: 13px; padding: 14px; background: #fff; border-radius: 10px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+  footer { text-align: center; font-size: 12px; color: #999; margin: 36px 0 20px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Playwright Test Report — Login Feature</h1>
+  <p>Run ID: login-2026-08-31-1813 &nbsp;|&nbsp; Environment: http://localhost:8000 &nbsp;|&nbsp; Browser: chromium &nbsp;|&nbsp; Executed: 2026-08-31 18:13 UTC</p>
+</header>
+
+<div class="container">
+
+  <div class="section-title">Summary</div>
+  <div class="cards">
+    <div class="card total"><div class="label">Total</div><div class="value">2</div></div>
+    <div class="card passed"><div class="label">Passed</div><div class="value">2</div></div>
+    <div class="card failed"><div class="label">Failed</div><div class="value">0</div></div>
+    <div class="card flaky"><div class="label">Flaky</div><div class="value">0</div></div>
+    <div class="card healed"><div class="label">Healed</div><div class="value">0</div></div>
+    <div class="card rate"><div class="label">Pass Rate</div><div class="value">100%</div></div>
+    <div class="card duration"><div class="label">Duration</div><div class="value">8.6s</div></div>
+  </div>
+
+  <div class="section-title">Run Details</div>
+  <table class="meta-table">
+    <tbody>
+      <tr><td>Feature</td><td>Login</td></tr>
+      <tr><td>Spec Files</td><td>tests/login/TC_LOGIN_P01.spec.js, tests/login/TC_LOGIN_N01.spec.js</td></tr>
+      <tr><td>Base URL</td><td>http://localhost:8000</td></tr>
+      <tr><td>Browser</td><td>chromium (headless)</td></tr>
+      <tr><td>Executed At</td><td>2026-08-31 18:13 UTC</td></tr>
+      <tr><td>Retries Configured</td><td>0</td></tr>
+      <tr><td>Workers</td><td>2</td></tr>
+      <tr><td>Config File</td><td>playwright.config.js</td></tr>
+    </tbody>
+  </table>
+
+  <div class="section-title">Test Results</div>
+  <table>
+    <thead>
+      <tr>
+        <th>Test ID</th>
+        <th>Title</th>
+        <th>Status</th>
+        <th>Duration</th>
+        <th>Retries</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>TC_LOGIN_P01</strong></td>
+        <td>Successful authentication for admin user</td>
+        <td><span class="badge badge-passed">Passed</span></td>
+        <td>3100ms</td>
+        <td>0</td>
+        <td>Confirmed Pass — valid admin credentials, redirect to /ui/, sessionStorage verified</td>
+      </tr>
+      <tr>
+        <td><strong>TC_LOGIN_N01</strong></td>
+        <td>Invalid username/password</td>
+        <td><span class="badge badge-passed">Passed</span></td>
+        <td>3500ms</td>
+        <td>0</td>
+        <td>Confirmed Pass — invalid credentials rejected, error banner visible, sessionStorage empty</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="section-title">Healer Activity</div>
+  <div class="no-healer">No tests were healed in this run. All tests passed on first attempt — no Healer agent involvement required.</div>
+
+</div>
+
+<footer>Generated by QA Automation Agent (claude-sonnet-4-6) &nbsp;|&nbsp; 2026-08-31 18:13 UTC</footer>
+</body>
+</html>

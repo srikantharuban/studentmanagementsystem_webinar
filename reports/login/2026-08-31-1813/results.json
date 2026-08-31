@@ -1,0 +1,41 @@
+{
+  "runId": "login-2026-08-31-1813",
+  "feature": "Login",
+  "environment": "http://localhost:8000",
+  "browser": "chromium",
+  "executedAt": "2026-08-31T18:13:00.000Z",
+  "summary": {
+    "total": 2,
+    "passed": 2,
+    "failed": 0,
+    "skipped": 0,
+    "flaky": 0,
+    "healed": 0,
+    "passRate": "100%",
+    "totalDuration": "8.6s"
+  },
+  "tests": [
+    {
+      "id": "TC_LOGIN_P01",
+      "title": "TC_LOGIN_P01 — Successful authentication for admin user",
+      "status": "passed",
+      "duration": "3100ms",
+      "browser": "chromium",
+      "retries": 0,
+      "failureReason": null,
+      "screenshot": null,
+      "healerNote": null
+    },
+    {
+      "id": "TC_LOGIN_N01",
+      "title": "TC_LOGIN_N01 — Invalid username/password",
+      "status": "passed",
+      "duration": "3500ms",
+      "browser": "chromium",
+      "retries": 0,
+      "failureReason": null,
+      "screenshot": null,
+      "healerNote": null
+    }
+  ]
+}

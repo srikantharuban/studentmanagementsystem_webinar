@@ -1,0 +1,13 @@
+[
+  {
+    "runId": "login-2026-08-31-1813",
+    "date": "2026-08-31",
+    "feature": "login",
+    "total": 2,
+    "passed": 2,
+    "failed": 0,
+    "flaky": 0,
+    "passRate": "100%",
+    "duration": "8.6s"
+  }
+]

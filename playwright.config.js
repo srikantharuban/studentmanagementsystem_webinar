@@ -4,6 +4,7 @@ module.exports = defineConfig({
   testDir: './tests',
   testMatch: '**/*.spec.js',
   timeout: 30000,
+  globalSetup: require.resolve('./global-setup.js'),
   use: {
     baseURL: 'http://localhost:8000',
     headless: true,

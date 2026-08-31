@@ -1,0 +1,13 @@
+{
+  "validAdmin": { "username": "admin", "password": "admin123" },
+  "invalidUser": { "username": "wronguser", "password": "badpassword" },
+  "expectedSession": {
+    "admin": {
+      "sms_auth": "true",
+      "sms_user": "admin",
+      "sms_role": "admin",
+      "sms_label": "Administrator"
+    }
+  },
+  "errorMessage": "⚠ Invalid username or password. Please try again."
+}

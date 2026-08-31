@@ -1,0 +1,24 @@
+# Python
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+*.db
+
+# Playwright generated output — not source-controlled
+playwright-report/
+test-results/
+node_modules/
+
+# Runtime logs
+server.log
+*.log
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# MCP config (local machine-specific)
+.mcp.json
